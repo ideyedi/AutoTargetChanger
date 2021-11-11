@@ -53,16 +53,41 @@ try:
 
     # Get li object
     get_li = drv.find_elements(By.TAG_NAME, 'li')
-    print(get_li, len(get_li))
+    #print(get_li, len(get_li))
 
     # Move to service jenkins job
     for item in get_li:
-        print(item.text)
+        #print(item.text)
 
         if 'PROD' in item.text:
-            print('Click !!!')
             tmp = item.find_elements(By.TAG_NAME, 'a')
             tmp[0].click()
+            break
+
+    # Go to configuration 
+    get_task = drv.find_elements(By.CLASS_NAME, 'task')
+    for item in get_task:
+        if 'Configure' in item.text:
+            tmp = item.find_elements(By.TAG_NAME, 'a')
+            tmp[0].click()
+            break
+
+    # Get TargetList
+    tmp = drv.find_elements(By.CLASS_NAME, 'repeated-chunk')
+    print(len(tmp))
+    for item in tmp:
+        get_td = item.find_elements(By.TAG_NAME, 'td')
+        for td in get_td:
+            if 'Name' in td.text:
+                inputcnt = td.find_elements(By.TAG_NAME, 'input')
+                print(len(inputcnt))
+                #print(inputcnt[0].value)
+                #if len()
+                #'input_target_list' == td.find_elements(By.TAG_NAME, 'input')[0].value:
+                #print('find it')
+                
+        #print(tdls)
+
 except:
     traceback.print_exc()
 
