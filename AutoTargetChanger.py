@@ -20,14 +20,13 @@ WebDrv = '/chromedriver'
 JenkinsURL = 'http://wdeploy.wemakeprice.kr'
 
 #print(path_project)
-
 Options = webdriver.ChromeOptions()
 Options.add_argument('--incognito')
 drv = webdriver.Chrome(path_project + WebDrv, options=Options)
 
 # Input tab which is ServiceName
-# ServiceName = input('Input ServiceName : ')
-ServiceName = 'nd-epes-api'
+ServiceName = input('Input ServiceName : ')
+# ServiceName = 'nd-epes-api'
 
 try:
     # Login process
@@ -45,7 +44,7 @@ try:
     #print(login_btn)
     login_btn[0].click()
 
-
+    #--------------------
     # Search service name at production level
     main_search = drv.find_elements_by_class_name('main-search__input')
     main_search[0].send_keys(ServiceName)
@@ -76,17 +75,21 @@ try:
     tmp = drv.find_elements(By.CLASS_NAME, 'repeated-chunk')
     print(len(tmp))
     for item in tmp:
-        get_td = item.find_elements(By.TAG_NAME, 'td')
+        get_td = item.find_elements(By.TAG_NAME, 'input')
         for td in get_td:
-            if 'Name' in td.text:
-                inputcnt = td.find_elements(By.TAG_NAME, 'input')
-                print(len(inputcnt))
-                #print(inputcnt[0].value)
-                #if len()
-                #'input_target_list' == td.find_elements(By.TAG_NAME, 'input')[0].value:
-                #print('find it')
-                
-        #print(tdls)
+            if 'input_target_list' == td.get_attribute('value'):
+                #print('find it!!')
+                tmp_tb = td.find_element_by_xpath('./../../..')
+                break
+
+    # find RE value
+    print("-"* 50)
+    print(tmp_tb.find_elements(By.TAG_NAME, 'textarea')[0].text)
+    print("-"* 50)
+
+    save_btn = drv.find_elements(By.ID, 'yui-gen69-button')
+    #print(len(save_btn))
+    save_btn[0].click()
 
 except:
     traceback.print_exc()
