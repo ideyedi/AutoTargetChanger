@@ -87,9 +87,8 @@ try:
     print(tmp_tb.find_elements(By.TAG_NAME, 'textarea')[0].text)
     print("-"* 50)
 
-    save_btn = drv.find_elements(By.ID, 'yui-gen69-button')
-    #print(len(save_btn))
-    save_btn[0].click()
+    #save_btn = drv.find_elements(By.ID, 'yui-gen69-button')
+    #save_btn[0].click()
 
 except:
     traceback.print_exc()
