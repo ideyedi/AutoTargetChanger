@@ -1,5 +1,5 @@
-# AutoTargetChanger
-귀찮으니 젠킨스 타겟리스트 자동변경 프로그램 작성. 
+# AutoTargetChanger  
+Toil이 너무 많기에 자동화 프로그램 작성. 
 
 ## Process
 1. Service Name 입력
